@@ -20,8 +20,8 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="apr-fO-gIY">
                         <rect key="frame" x="0.0" y="0.0" width="348" height="362"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:8lJ-Aj-oh2:image" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="8lJ-Aj-oh2">
-                                <rect key="frame" x="21" y="21" width="304" height="174.5"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:8lJ-Aj-oh2:image" translatesAutoresizingMaskIntoConstraints="NO" id="8lJ-Aj-oh2">
+                                <rect key="frame" x="21" y="20" width="304" height="176"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="176" id="mXx-DL-0ry"/>
                                 </constraints>
@@ -63,7 +63,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="imageView:8lJ-Aj-oh2:image" catalog="system" width="128" height="121">
+        <image name="imageView:8lJ-Aj-oh2:image" width="128" height="121">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMSAAGGoF8QD05T
 S2V5ZWRBcmNoaXZlctEICVRyb290gAGvEBELDBscIRkmKywzNjlDS0xQU1UkbnVsbNcNDg8QERITFBUW

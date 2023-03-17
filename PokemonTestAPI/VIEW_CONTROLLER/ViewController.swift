@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  PokemonTestAPI
 //
-//  Created by Phincon on 15/03/23.
+//  Created by Salma Ayu on 15/03/23.
 //
 
 import UIKit
@@ -14,8 +14,12 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
 
     @IBOutlet weak var collectionView: UICollectionView!
     
+    //view model
     var viewModel : PokemonViewModel?
+    
+    //model
     private var pokemonApiList:  PokemonApi?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +27,8 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         
         registerCollcetionView()
         self.viewModel = PokemonViewModel(urlString: "https://pokeapi.co/api/v2/pokemon", apiService: ApiService())
-        
+//        self.viewModel2 = MovePokemonViewModel(urlString: "https://pokeapi.co/api/v2/pokemon/", apiService: <#T##ApiServiceProtocol#>)
+    
         self.viewModel?.bindPokemonData = { pokemonListModel in
             print("this is the data: \(pokemonListModel)")
             if let dataAja = pokemonListModel {
@@ -60,6 +65,16 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return pokemonApiList?.results.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let pokemon = self.viewModel?.data?.results[indexPath.row],
+           let pokemonDetail = storyboard.instantiateViewController(withIdentifier: MovePokemonViewController.identifier) as? MovePokemonViewController {
+            pokemonDetail.moveUrl = pokemon.url
+            self.navigationController?.pushViewController(pokemonDetail, animated: true)
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

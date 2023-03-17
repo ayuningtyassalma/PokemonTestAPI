@@ -2,7 +2,7 @@
 //  PokemonViewModel.swift
 //  PokemonTestAPI
 //
-//  Created by Phincon on 15/03/23.
+//  Created by Salma Ayu on 15/03/23.
 //
 
 import Foundation
@@ -14,7 +14,7 @@ protocol PokemonApiProtocol {
 }
 
 class PokemonViewModel: PokemonApiProtocol {
-    private var apiService : ApiServiceProtocol?
+    private var apiService : ApiServiceProtocol? //ngmbil dari APISERVICE JD API SERVICE NYA DI BIKIN DLU
     var data : PokemonApi?
     var urlString: String = ""
     var bindPokemonData: ((PokemonApi?) -> ())?

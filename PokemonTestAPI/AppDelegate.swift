@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  PokemonTestAPI
 //
-//  Created by Phincon on 15/03/23.
+//  Created by Salma Ayu on 15/03/23.
 //
 
 import UIKit
