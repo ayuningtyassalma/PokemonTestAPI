@@ -18,7 +18,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     var viewModel : PokemonViewModel?
     
     //model
-    private var pokemonApiList:  PokemonApi?
+     var pokemonApiList:  PokemonApi?
     
     
     override func viewDidLoad() {
@@ -41,6 +41,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             }
         }
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        title = "Choose your Hero!"
     }
     
     func setUpPokemonCellFlowLayout() -> UICollectionViewLayout{
@@ -69,9 +73,10 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let pokemon = self.viewModel?.data?.results[indexPath.row],
+        if let pokemon = self.pokemonApiList?.results[indexPath.row],
            let pokemonDetail = storyboard.instantiateViewController(withIdentifier: MovePokemonViewController.identifier) as? MovePokemonViewController {
-            pokemonDetail.moveUrl = pokemon.url
+            
+            pokemonDetail.listPoke = pokemon
             self.navigationController?.pushViewController(pokemonDetail, animated: true)
         }
         
@@ -83,7 +88,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             }
         cell.imageView.sd_setImage(with:URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(indexPath.row + 1).png"))
             cell.pokemonNameLabel.text = pokemonApiList?.results[indexPath.row].name
-        cell.containerView.layer.borderWidth = 1
+        cell.containerView.layer.borderWidth = 2
         cell.containerView.layer.borderColor = UIColor.black.cgColor
 
         return cell

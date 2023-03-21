@@ -10,10 +10,24 @@ import Foundation
 struct MovePokemonAPI : Codable {
     var moves : [Moves]
     var name : String
-    var baseExperience : Int
+    var baseExperience : Int?
+    let stats: [Stat]
     //gambarnya
     var sprites : Sprites
     
+    var hp: Int {
+        for stat in stats {
+            if stat.stat.name == "hp"{
+                return stat.baseStat
+            }
+            
+        }
+        return 0
+    }
+    enum CodingKeys: String, CodingKey {
+        case moves, name, sprites, stats
+        case baseExperience = "base_experience"
+    }
     }
 
 struct Moves : Codable {
@@ -28,30 +42,33 @@ struct Species: Codable {
     let url: String
 }
 
-class Sprites: Codable {
-    let backDefault, backFemale, backShiny, backShinyFemale: String
-    let frontDefault, frontFemale, frontShiny, frontShinyFemale: String
+struct Sprites: Codable {
+    let frontDefault : String
 
     enum CodingKeys: String, CodingKey {
-        case backDefault = "back_default"
-        case backFemale = "back_female"
-        case backShiny = "back_shiny"
-        case backShinyFemale = "back_shiny_female"
-        case frontDefault = "front_default"
-        case frontFemale = "front_female"
-        case frontShiny = "front_shiny"
-        case frontShinyFemale = "front_shiny_female"
+ case frontDefault = "front_default"}
+    
+}
+
+
+struct Stat: Codable {
+    let baseStat: Int
+    let stat: Species
+
+    enum CodingKeys: String, CodingKey {
+        case baseStat = "base_stat"
+        case stat
     }
 
-    init(backDefault: String, backFemale: String, backShiny: String, backShinyFemale: String, frontDefault: String, frontFemale: String, frontShiny: String, frontShinyFemale: String) {
-        self.backDefault = backDefault
-        self.backFemale = backFemale
-        self.backShiny = backShiny
-        self.backShinyFemale = backShinyFemale
-        self.frontDefault = frontDefault
-        self.frontFemale = frontFemale
-        self.frontShiny = frontShiny
-        self.frontShinyFemale = frontShinyFemale
-    }
+//    init(backDefault: String, backFemale: String, backShiny: String, backShinyFemale: String, frontDefault: String, frontFemale: String, frontShiny: String, frontShinyFemale: String) {
+//        self.backDefault = backDefault
+//        self.backFemale = backFemale
+//        self.backShiny = backShiny
+//        self.backShinyFemale = backShinyFemale
+//        self.frontDefault = frontDefault
+//        self.frontFemale = frontFemale
+//        self.frontShiny = frontShiny
+//        self.frontShinyFemale = frontShinyFemale
+//    }
 
 }

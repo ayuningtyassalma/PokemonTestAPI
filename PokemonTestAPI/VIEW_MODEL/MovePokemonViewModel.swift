@@ -16,26 +16,37 @@ protocol MoreDetailsPokemonProtocol {
 class MovePokemonViewModel: MoreDetailsPokemonProtocol {
     private var apiService : ApiServiceProtocol?
     var urlString: String = ""
-    
     var bindMoreDetailPokemon: ((MovePokemonAPI?) -> ())?
+    var delegate :  MoreDetailsPokemonProtocol?
     
     
-    init(urlString : String) {
+//    init(urlString : String) {
+//        self.urlString = urlString
+//        self.apiService = ApiService()
+//
+//        if let url = URL(string: urlString){
+//            self.apiService?.get(url: url)
+//        }
+    init(urlString : String, apiService: ApiServiceProtocol) {
         self.urlString = urlString
-        self.apiService = ApiService()
-        
+        self.apiService = apiService as? ApiService
         if let url = URL(string: urlString){
             self.apiService?.get(url: url)
         }
-        
-        fetchDataMoreDetailsPokemon()
+//        fetchDataMoreDetailsPokemon()
     }
     func fetchDataMoreDetailsPokemon() {
         self.apiService?.callApi(model: MovePokemonAPI?.self, completion: { response in
+            print("Response")
+            print(response)
             switch response{
             case .success(let success):
+                print("success")
+                print(success)
                 self.bindMoreDetailPokemon?(success)
-            case .failure(let fail):
+//                print("success")
+            case .failure(_):
+                print("error")
                 self.bindMoreDetailPokemon?(nil)
             }
         })

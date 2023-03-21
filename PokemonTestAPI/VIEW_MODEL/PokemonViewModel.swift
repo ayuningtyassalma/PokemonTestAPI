@@ -35,7 +35,7 @@ class PokemonViewModel: PokemonApiProtocol {
             switch response{
             case .success(let sucess):
                 self.bindPokemonData?(sucess)
-            case .failure(let fail):
+            case .failure(_):
                 self.bindPokemonData?(nil)
             }
         })
