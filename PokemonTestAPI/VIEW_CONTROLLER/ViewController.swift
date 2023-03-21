@@ -24,8 +24,9 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+        assignBackground()
         registerCollcetionView()
+//        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "waves-background.png")!)
         self.viewModel = PokemonViewModel(urlString: "https://pokeapi.co/api/v2/pokemon", apiService: ApiService())
 //        self.viewModel2 = MovePokemonViewModel(urlString: "https://pokeapi.co/api/v2/pokemon/", apiService: <#T##ApiServiceProtocol#>)
     
@@ -46,6 +47,30 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
     override func viewWillAppear(_ animated: Bool) {
         title = "Choose your Hero!"
     }
+    
+    func assignBackground(){
+        let background = UIImage(named: "waves-background-2")
+        var image : UIImageView!
+        image = UIImageView(frame: view.bounds)
+        image.contentMode = .scaleToFill
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.clipsToBounds = false
+        image.image = background
+//        image.center = view.center
+        self.view.addSubview(image)
+        self.view.sendSubviewToBack(image)
+        
+        NSLayoutConstraint.activate([
+            image.topAnchor.constraint(equalTo: self.view.topAnchor),
+            image.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            image.rightAnchor.constraint(equalTo: self.view.rightAnchor),
+            image.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+        ])
+        
+        collectionView.backgroundColor = .clear
+    }
+    
+    
     
     func setUpPokemonCellFlowLayout() -> UICollectionViewLayout{
         let flowlayout = UICollectionViewFlowLayout()
@@ -88,8 +113,7 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
             }
         cell.imageView.sd_setImage(with:URL(string: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/\(indexPath.row + 1).png"))
             cell.pokemonNameLabel.text = pokemonApiList?.results[indexPath.row].name
-        cell.containerView.layer.borderWidth = 2
-        cell.containerView.layer.borderColor = UIColor.black.cgColor
+
 
         return cell
         }
