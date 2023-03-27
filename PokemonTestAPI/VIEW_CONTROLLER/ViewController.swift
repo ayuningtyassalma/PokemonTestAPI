@@ -26,18 +26,14 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         // Do any additional setup after loading the view.
         assignBackground()
         registerCollcetionView()
-//        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "waves-background.png")!)
         self.viewModel = PokemonViewModel(urlString: "https://pokeapi.co/api/v2/pokemon", apiService: ApiService())
-//        self.viewModel2 = MovePokemonViewModel(urlString: "https://pokeapi.co/api/v2/pokemon/", apiService: <#T##ApiServiceProtocol#>)
+
     
         self.viewModel?.bindPokemonData = { pokemonListModel in
             print("this is the data: \(pokemonListModel)")
             if let dataAja = pokemonListModel {
                 self.pokemonApiList = dataAja
-                
-//                self.collectionView.backgroundColor = .blue
-            }
-            DispatchQueue.main.async {
+            };DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
         }
@@ -56,7 +52,6 @@ class ViewController: UIViewController, UICollectionViewDataSource, UICollection
         image.translatesAutoresizingMaskIntoConstraints = false
         image.clipsToBounds = false
         image.image = background
-//        image.center = view.center
         self.view.addSubview(image)
         self.view.sendSubviewToBack(image)
         

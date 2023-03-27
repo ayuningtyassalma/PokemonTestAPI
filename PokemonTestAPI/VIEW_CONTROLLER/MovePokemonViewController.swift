@@ -36,15 +36,36 @@ class MovePokemonViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.viewModel = MovePokemonViewModel(urlString: <#T##String#>, apiService: <#T##ApiServiceProtocol#>)
-        setUpViewModel()
+        assignBackground()
         registerTableView()
-    
+        tableView.separatorStyle = .none
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         title = "Your Hero"
+    }
+    
+    func assignBackground(){
+        let background = UIImage(named: "waves-background-2")
+        var image : UIImageView!
+        image = UIImageView(frame: view.bounds)
+        image.contentMode = .scaleToFill
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.clipsToBounds = false
+        image.image = background
+        
+        view.addSubview(image)
+        self.view.sendSubviewToBack(image)
+        
+        NSLayoutConstraint.activate([
+            image.topAnchor.constraint(equalTo: self.view.topAnchor),
+            image.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            image.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            image.rightAnchor.constraint(equalTo: self.view.rightAnchor)
+        
+        ])
+        tableView.backgroundColor = .clear
     }
     
     func setUpViewModel(){
@@ -67,12 +88,6 @@ class MovePokemonViewController: UIViewController, UITableViewDelegate, UITableV
     func registerTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-//        let heroTableCell = UINib(nibName: HeroNameTableViewCell.identifier, bundle: nil)
-//        tableView.register(heroTableCell, forCellReuseIdentifier: HeroNameTableViewCell.identifier)
-//        let moveTableCell = UINib(nibName: MovePokemonTableViewCell.identifier, bundle: nil)
-//        tableView.register(moveTableCell, forCellReuseIdentifier: MovePokemonTableViewCell.identifier )
-//        let quickAttackCell = UINib(nibName: QuickAttackTableViewCell.identifier, bundle: nil)
-//        tableView.register(quickAttackCell, forCellReuseIdentifier: QuickAttackTableViewCell.identifier)
         tableView.register(UINib(nibName: HeroNameTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: HeroNameTableViewCell.identifier)
         tableView.register(UINib(nibName: MovePokemonTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: MovePokemonTableViewCell.identifier)
         tableView.register(UINib(nibName: QuickAttackTableViewCell.identifier, bundle: nil), forCellReuseIdentifier: QuickAttackTableViewCell.identifier)

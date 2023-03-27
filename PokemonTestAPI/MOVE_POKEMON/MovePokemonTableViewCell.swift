@@ -16,9 +16,7 @@ class MovePokemonTableViewCell: UITableViewCell {
     
     @IBOutlet weak var frameView: UIView!{
         didSet{
-//            frameView.layer.borderWidth = 6
-//            self.frameView.backgroundColor = UIColor(patternImage: UIImage(named: "yellowPolkaDotBackground.jpg")!)
-//            frameView.layer.borderColor = UIColor.yellow.cgColor
+            frameView.backgroundColor = UIColor.black.withAlphaComponent(0)
         }
     }
     
